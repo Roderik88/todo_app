@@ -1,0 +1,31 @@
+<%= render 'layouts/navbar' %>
+
+<!-- utilizar la clase well -->
+<!-- each para todas las tareas y mostrar cada elemento con well -->
+
+<%= link_to "agregar nueva tarea", todos_new_path, class: 'btn btn-success float-right' %>
+
+<h1>ToDo</h1>
+
+<%= link_to "lista", todo_list_path, class: 'btn btn-success' %>
+
+<% @todos.each do |task| %>
+ <div class="card card-body bg-light">
+   <%= task.description %>
+   <%= link_to 'ver', task, class: 'btn btn-success float-left'%>
+   <%= link_to 'editar', todo_edit_path(task), class: 'btn btn-primary'%>
+   <%= link_to 'eliminar', task, method: :delete, class: 'btn btn-danger'%>
+ </div>
+
+ <br>
+
+ <div>
+   <% if task.completed == true %>
+   <label >realizada</label>
+   <% else %>
+   <label >pendiente</label>
+   <%= link_to 'realizada', todo_completed_path(task), class: 'btn btn-danger' %>
+   <% end %>
+
+ </div>
+<% end %>
